@@ -1,0 +1,11 @@
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\bin\Debug\CuentasClaras.exe.config
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\bin\Debug\CuentasClaras.exe
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\bin\Debug\CuentasClaras.pdb
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.csproj.AssemblyReference.cache
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.csproj.SuggestedBindingRedirects.cache
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.Form1.resources
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.Properties.Resources.resources
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.csproj.GenerateResource.cache
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.csproj.CoreCompileInputs.cache
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.exe
+C:\Users\sehent\Desktop\CuentasClaras\CuentasClaras\obj\Debug\CuentasClaras.pdb
