@@ -21,12 +21,8 @@ namespace CuentasClaras
             label6.Enabled = false;
             label5.Enabled = false;
             Path = "BaseDeDatos.txt";
-            Guardar.Enabled = false;
 
-            radioDeudaAgregar.Enabled = false;
-            RadioDeudaRestar.Enabled = false;
-            Full2.Enabled = false;
-
+            Refrescar();
 
             LeerBase();
             //MensajesDatos();
@@ -204,7 +200,7 @@ namespace CuentasClaras
                     if (result == DialogResult.Yes)
                     {
                         int Dato = MontoTotal;
-                        MontoEnposo.Text = Convert.ToString(MontoTotal + Diferencia);
+                        MontoEnposo.Text = Convert.ToString(MontoTotal - Diferencia);
                         MontoTotal = Convert.ToInt32(MontoEnposo.Text);
                         string text = string.Format("La deuda ha aumentado de {0}  a  {1}", Dato, MontoTotal);
                         MessageBox.Show(text);
@@ -233,9 +229,8 @@ namespace CuentasClaras
             EscribirBase();
             LeerBase();
 
-            radioDeudaAgregar.Enabled = true;
-            RadioDeudaRestar.Enabled = true;
-            Full2.Enabled = true;
+            Refrescar();
+          
 
         }
 
@@ -252,8 +247,7 @@ namespace CuentasClaras
                 {
 
                     DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoGastoS, MontoAntoS, MontoGastoS, fechaTransaccion, detalles);
-                    AjusteTamaño(DATA);
-                    //sw.WriteLine("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoNachoS, MontoAntoS, MontoGastoS, fechaTransaccion, detalles + System.Environment.NewLine);
+                    AjusteTamaño(DATA);                    
 
                     sw.WriteLine(DATA + System.Environment.NewLine);
                     sw.Close();
@@ -262,9 +256,8 @@ namespace CuentasClaras
                 else if (RadioDeudaRestar.Checked)
                 {
 
-                    DATA = string.Format("{0}|{1}|{2}|{3}", MontoTotalS, MontoGastoS, fechaTransaccion, detalles);
+                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoGastoS,"00000", "00000", fechaTransaccion, detalles);
                     AjusteTamaño(DATA);
-                    // sw.WriteLine("{0}|{1}|{2}|{3}", MontoTotalS, MontoGastoS, fechaTransaccion, detalles + System.Environment.NewLine);
                    
                     sw.WriteLine(DATA + System.Environment.NewLine);
                     sw.Close();
@@ -362,15 +355,13 @@ namespace CuentasClaras
 
         public void AjusteTamaño(string data)
         {
+            data += "|";
             int var1 = data.Length;
             if (var1 < 100) {
 
-                int var2 = 100 - var1;
-                data += "|";
-
-                while (var2 != 100) {
+                while (var1 != 100) {
                     data += "-";
-                    var2++;
+                    var1++;
                 }
             }
 
@@ -407,12 +398,12 @@ namespace CuentasClaras
                         string Nacho = line.Substring(6, 5);
                         string Anto = line.Substring(12, 5);
                         string Gasto = line.Substring(18, 5);
-                        string Transaccion = line.Substring(21, 5);
-                        string Detalles = "";// line.Substring(26, 100);
+                        string Transaccion = line.Substring(24, 17);
+                        string Detalles = line.Substring(42, 58);
 
 
 
-                        DataEnBase = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", poso, Nacho, Anto, Gasto, Transaccion, Detalles ); 
+                        DataEnBase = string.Format("El ultimo poso fue de: " + poso + "$" + "\r\n" + "El gasto de Nacho fue de: " + Nacho + "$" + "\r\n" + "El gasto de anto fue de:" + Anto  + "$" + "\r\n" + "El gasto total fue de: " + Gasto + "$" + "\r\n" + "La fecha fue: " + Transaccion + "\r\n" + "Detalle: " + Detalles + "$" ); 
                         line = sr.ReadLine();
                     }
                     else
@@ -446,17 +437,18 @@ namespace CuentasClaras
             {
                 checkNacho.Checked = false;
                 checkAnto.Checked = false;
+                checkHalf.Checked = true;
+                Full2.Checked = false;
+
                 MontoNacho2.Enabled = true;
                 MontoAnto2.Enabled = true;
                 label6.Enabled = true;
                 label5.Enabled = true;
                 radioCuenta.Enabled = true;
-
-
                 radioDeudaAgregar.Enabled = false;
                 RadioDeudaRestar.Enabled = false;
-                Full2.Enabled = false;
-
+                Full2.Enabled = false;           
+                checkHalf.Enabled = false;
                 Guardar.Enabled = true;
             }
             else
@@ -472,6 +464,7 @@ namespace CuentasClaras
                 radioDeudaAgregar.Enabled = false;
                 RadioDeudaRestar.Enabled = false;
                 Full2.Enabled = false;
+                checkHalf.Enabled = false;
 
                 Guardar.Enabled = false;
 
@@ -487,11 +480,12 @@ namespace CuentasClaras
             {
                 checkNacho.Checked = false;
                 CheckAmbos.Checked = false;
-               
+                
 
                 radioDeudaAgregar.Enabled = true;
                 RadioDeudaRestar.Enabled = true;
                 Full2.Enabled = true;
+                checkHalf.Enabled = true;
 
             }
             else {
@@ -499,6 +493,10 @@ namespace CuentasClaras
                 radioDeudaAgregar.Enabled = false;
                 RadioDeudaRestar.Enabled = false;
                 Full2.Enabled = false;
+                checkHalf.Enabled = false;
+
+                radioDeudaAgregar.Checked = false;
+                RadioDeudaRestar.Checked = false;
             }
 
         }
@@ -513,44 +511,40 @@ namespace CuentasClaras
                
 
                 radioDeudaAgregar.Enabled = true;
+                checkHalf.Enabled = true;
                 RadioDeudaRestar.Enabled = true;
                 Full2.Enabled = true;
             }
             else {
                 Guardar.Enabled = false;
                 radioDeudaAgregar.Enabled = false;
+                checkHalf.Enabled = false;
                 RadioDeudaRestar.Enabled = false;
                 Full2.Enabled = false;
+
+                radioDeudaAgregar.Checked = false;
+                RadioDeudaRestar.Checked = false;
             }
  
 
         }
-
-        #region
-        private void textBox2_TextChanged(object sender, EventArgs e){
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
+       
+        public void Refrescar() {
+          
+            radioDeudaAgregar.Enabled = false;
+            checkHalf.Enabled = false;
+            RadioDeudaRestar.Enabled = false;
+            Full2.Enabled = true;
+            Guardar.Enabled = false;
+            radioDeudaAgregar.Checked = false;
+            RadioDeudaRestar.Checked = false;
+            CheckAmbos.Checked = false;
+            checkAnto.Checked = false;
+            checkNacho.Checked = false;
+            checkHalf.Checked = true;
+            MontoGastado.Text = "";
 
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
         public void MensajesDatos()
         {
 
@@ -615,23 +609,163 @@ namespace CuentasClaras
 
         }
 
-        public string MensajeDetalles() {
+        public string MensajeDetalles()
+        {
             string texto;
             string textoMemoria = "";
 
-           texto =  Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 30 caracteres)", "Detalles de gasto ", "0", 200, 200);
+            texto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 30 caracteres)", "Detalles de gasto ", "0", 200, 200);
 
-            while (texto.Length > 30) {
+            while (texto.Length > 30)
+            {
                 textoMemoria = texto;
                 string text = string.Format("La cantidad de caracteres no debe ser mayor a 30");
                 MessageBox.Show(text);
-                texto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 10 caracteres)", "Detalles de gasto ",textoMemoria, 500, 500);
+                texto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 10 caracteres)", "Detalles de gasto ", textoMemoria, 500, 500);
 
             }
 
             return texto;
-        } 
+        }
 
+        private void Full2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Full2.Checked)
+            {
+                checkHalf.Checked = false;
+            }
+            else {
+                checkHalf.Checked = true;
+            }
+        }
+
+        private void checkHalf_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkHalf.Checked)
+            {
+                Full2.Checked = false;
+            }
+            else
+            {
+                Full2.Checked = true;
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            Guardar.Enabled = true;
+        }
+        private void RadioDeudaRestar_CheckedChanged(object sender, EventArgs e)
+        {
+            Guardar.Enabled = true;
+        }
+
+
+
+        private void MontoNacho2_TextChanged(object sender, EventArgs e)
+        {
+            int var1;
+            int var2;
+
+            if (MontoGastado.Text != "")
+            {
+
+                if (MontoNacho2.Text == "")
+                {
+                    var1 = Convert.ToInt32("0");
+                    if (MontoGastado.Text == "")
+                    {
+                        MontoGastado.Text = "0";
+                    }
+                    var2 = Convert.ToInt32(MontoGastado.Text);
+                    MontoAnto2.Text = Convert.ToString(var2 - var1);
+                }
+                else
+                {
+
+                    var1 = Convert.ToInt32(MontoNacho2.Text);
+                    if (MontoGastado.Text == "")
+                    {
+                        MontoGastado.Text = "0";
+                    }
+                    var2 = Convert.ToInt32(MontoGastado.Text);
+                    MontoAnto2.Text = Convert.ToString(var2 - var1);
+
+                }
+
+
+            }
+        }
+
+        private void MontoAnto2_TextChanged(object sender, EventArgs e)
+        {
+            int var1;
+            int var2;
+        if (MontoGastado.Text != "") { 
+                if (MontoAnto2.Text == "")
+                {
+                    var1 = Convert.ToInt32("0");
+
+
+                    if (MontoGastado.Text == "")
+                    {
+                        MontoGastado.Text = "0";
+                    }
+                    var2 = Convert.ToInt32(MontoGastado.Text);
+                    MontoNacho2.Text = Convert.ToString(var2 - var1);
+                }
+                else
+                {
+
+                    var1 = Convert.ToInt32(MontoAnto2.Text);
+
+
+                    if (MontoGastado.Text == "")
+                    {
+                        MontoGastado.Text = "0";
+                    }
+                    var2 = Convert.ToInt32(MontoGastado.Text);
+                    MontoNacho2.Text = Convert.ToString(var2 - var1);
+
+                }
+
+            }
+        }
+
+        private void MontoGastado_TextChanged(object sender, EventArgs e)
+        {          
+                MontoNacho2.Text = "";
+                MontoAnto2.Text = "";
+
+            if (MontoGastado.Text == "0")
+            {
+
+                MontoGastado.Text = "";
+            }
+        }
+
+
+        #region
+        private void textBox2_TextChanged(object sender, EventArgs e){
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+    
 
         #endregion
 

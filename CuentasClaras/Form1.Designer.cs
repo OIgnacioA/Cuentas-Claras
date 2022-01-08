@@ -52,6 +52,7 @@
             this.RadioDeudaRestar = new System.Windows.Forms.RadioButton();
             this.checkAnto = new System.Windows.Forms.CheckBox();
             this.Full2 = new System.Windows.Forms.CheckBox();
+            this.checkHalf = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkNacho
@@ -107,9 +108,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(323, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
+            this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Deuda";
+            this.label2.Text = "Fondo";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
@@ -147,6 +148,7 @@
             this.MontoGastado.Size = new System.Drawing.Size(125, 20);
             this.MontoGastado.TabIndex = 12;
             this.MontoGastado.Text = "2000";
+            this.MontoGastado.TextChanged += new System.EventHandler(this.MontoGastado_TextChanged);
             // 
             // label4
             // 
@@ -163,7 +165,7 @@
             this.MontoAnto2.Name = "MontoAnto2";
             this.MontoAnto2.Size = new System.Drawing.Size(125, 20);
             this.MontoAnto2.TabIndex = 14;
-            this.MontoAnto2.Text = "12";
+            this.MontoAnto2.TextChanged += new System.EventHandler(this.MontoAnto2_TextChanged);
             // 
             // label5
             // 
@@ -180,7 +182,7 @@
             this.MontoNacho2.Name = "MontoNacho2";
             this.MontoNacho2.Size = new System.Drawing.Size(125, 20);
             this.MontoNacho2.TabIndex = 16;
-            this.MontoNacho2.Text = "10";
+            this.MontoNacho2.TextChanged += new System.EventHandler(this.MontoNacho2_TextChanged);
             // 
             // label6
             // 
@@ -242,10 +244,10 @@
             this.radioDeudaAgregar.AutoSize = true;
             this.radioDeudaAgregar.Location = new System.Drawing.Point(78, 200);
             this.radioDeudaAgregar.Name = "radioDeudaAgregar";
-            this.radioDeudaAgregar.Size = new System.Drawing.Size(99, 17);
+            this.radioDeudaAgregar.Size = new System.Drawing.Size(113, 17);
             this.radioDeudaAgregar.TabIndex = 22;
             this.radioDeudaAgregar.TabStop = true;
-            this.radioDeudaAgregar.Text = "Sumar a Deuda";
+            this.radioDeudaAgregar.Text = "Quitar de la Zacoa";
             this.radioDeudaAgregar.UseVisualStyleBackColor = true;
             this.radioDeudaAgregar.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
@@ -254,11 +256,12 @@
             this.RadioDeudaRestar.AutoSize = true;
             this.RadioDeudaRestar.Location = new System.Drawing.Point(78, 223);
             this.RadioDeudaRestar.Name = "RadioDeudaRestar";
-            this.RadioDeudaRestar.Size = new System.Drawing.Size(106, 17);
+            this.RadioDeudaRestar.Size = new System.Drawing.Size(114, 17);
             this.RadioDeudaRestar.TabIndex = 23;
             this.RadioDeudaRestar.TabStop = true;
-            this.RadioDeudaRestar.Text = "Restar de Deuda";
+            this.RadioDeudaRestar.Text = "Agregar a la zacoa";
             this.RadioDeudaRestar.UseVisualStyleBackColor = true;
+            this.RadioDeudaRestar.CheckedChanged += new System.EventHandler(this.RadioDeudaRestar_CheckedChanged);
             // 
             // checkAnto
             // 
@@ -274,18 +277,31 @@
             // Full2
             // 
             this.Full2.AutoSize = true;
-            this.Full2.Location = new System.Drawing.Point(78, 246);
+            this.Full2.Location = new System.Drawing.Point(62, 256);
             this.Full2.Name = "Full2";
             this.Full2.Size = new System.Drawing.Size(42, 17);
             this.Full2.TabIndex = 26;
             this.Full2.Text = "Full";
             this.Full2.UseVisualStyleBackColor = true;
+            this.Full2.CheckedChanged += new System.EventHandler(this.Full2_CheckedChanged);
+            // 
+            // checkHalf
+            // 
+            this.checkHalf.AutoSize = true;
+            this.checkHalf.Location = new System.Drawing.Point(162, 256);
+            this.checkHalf.Name = "checkHalf";
+            this.checkHalf.Size = new System.Drawing.Size(45, 17);
+            this.checkHalf.TabIndex = 27;
+            this.checkHalf.Text = "Half";
+            this.checkHalf.UseVisualStyleBackColor = true;
+            this.checkHalf.CheckedChanged += new System.EventHandler(this.checkHalf_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 382);
+            this.Controls.Add(this.checkHalf);
             this.Controls.Add(this.Full2);
             this.Controls.Add(this.checkAnto);
             this.Controls.Add(this.RadioDeudaRestar);
@@ -343,6 +359,7 @@
         private System.Windows.Forms.RadioButton RadioDeudaRestar;
         private System.Windows.Forms.CheckBox checkAnto;
         private System.Windows.Forms.CheckBox Full2;
+        private System.Windows.Forms.CheckBox checkHalf;
     }
 }
 
