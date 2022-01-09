@@ -41,6 +41,7 @@ namespace CuentasClaras
 
                 MontoTotalAux = CorregirSigno(PozoDeudaActual);
 
+
                 MontoTotal = Convert.ToInt32(MontoTotalAux);
                 MontoEnposo.Text = MontoTotalAux;
             }
@@ -252,7 +253,7 @@ namespace CuentasClaras
                 if (radioDeudaAgregar.Checked)
                 {
 
-                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoGastoS, MontoAntoS, MontoGastoS, fechaTransaccion, detalles);
+                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoGastoS, MontoAntoS, MontoNachoS, fechaTransaccion, detalles);
                     AjusteTamaño(DATA);                    
 
                     sw.WriteLine(DATA + System.Environment.NewLine);
@@ -262,7 +263,7 @@ namespace CuentasClaras
                 else if (RadioDeudaRestar.Checked)
                 {
 
-                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoGastoS,"00000", "00000", fechaTransaccion, detalles);
+                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, "00000", "00000", MontoGastoS, fechaTransaccion, detalles);
                     AjusteTamaño(DATA);
                    
                     sw.WriteLine(DATA + System.Environment.NewLine);
@@ -271,9 +272,9 @@ namespace CuentasClaras
 
                 if ((radioDeudaAgregar.Checked) && (Flagg == true))
                 {
-                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoGastoS, MontoAntoS, MontoGastoS, fechaTransaccion, detalles);
+                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoAntoS, MontoNachoS, MontoGastoS, fechaTransaccion, detalles);
                     AjusteTamaño(DATA);
-                    //sw.WriteLine("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoNachoS, MontoAntoS, MontoGastoS, fechaTransaccion, detalles + System.Environment.NewLine);
+                  
                    
                     sw.WriteLine(DATA + System.Environment.NewLine);
                     sw.Close();
@@ -318,8 +319,8 @@ namespace CuentasClaras
 
                         string poso = line.Substring(0, 5);
                         string posoAux = CorregirSigno(poso);
-                        string Nacho = line.Substring(6, 5);
-                        string Anto = line.Substring(12, 5);
+                        string Anto = line.Substring(6, 5);
+                        string Nacho = line.Substring(12, 5);
                         string Gasto = line.Substring(18, 5);
                         string Transaccion = line.Substring(24, 17);
                         string Detalles = line.Substring(42, 108);
@@ -336,7 +337,9 @@ namespace CuentasClaras
                         AuxTransaccion = Transaccion;
 
                         TodaDataEnBase += DataEnBase;
-                        contenido = TodaDataEnBase;
+                       
+                        contenido = CrearHTML(poso, Nacho, Anto, Gasto, Transaccion, Detalles); 
+
                         line = sr.ReadLine();
                     }
                     else
@@ -347,7 +350,7 @@ namespace CuentasClaras
 
                 Historial.Text = DataEnBase;
                 sr.Close();
-                Console.ReadLine();
+                //Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -398,26 +401,65 @@ namespace CuentasClaras
                 
             }
 
-            MontoTotalAux = dato.Substring(cont, (dato.Length - cont));
+            if (flag == false) {
+
+                MontoTotalAux = "0";
+
+            } else {
+
+                MontoTotalAux = dato.Substring(cont, (dato.Length - cont));
+
+            }
+
+          
+
 
             return MontoTotalAux;
         }
 
         private void GenerarArchivo_Click(object sender, EventArgs e)
         {
-  
+            html = string.Empty;
+            contenido = string.Empty;
+
+            LeerBase();
+
             string patth = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string html = string.Format("{0}\\archivo.html",patth);
+            string name = string.Format("{0}\\archivo.html",patth);
 
-            StreamWriter sw = new System.IO.StreamWriter(html);
+            StreamWriter sw = new System.IO.StreamWriter(name);
 
-            sw.Write(contenido);
+
+            htmlHead = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta http-equiv='X-UA-Compatible' content='IE=edge'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title> Document </title><style>body {background-image: url('htt";
+
+
+            htmlHead += "ps://www.sacoacard.com/uploads/fotos/22/foto_22.jpg');width: 100%;height: 100%;position: absolute;}</style></head><body><Caption> Planilla de Gastos: (Zacoa) </caption><br><br><table border =\"3\"><thead style = 'background: rgb(224, 165, 106);; border: 1px solid rgba(200, 100, 0, 0.3);'><tr><th>Fecha</th><th> Poso </th><th> Gasto de Nacho </th><th> Gasto de Anto </th><th> Gasto Total </th><th> Detalles </th></tr></thead><tbody style='background: rgb(189, 207, 241); border: 2px solid rgba(17, 10, 4, 0.3);'>";
+
+
+            htmlFoot = string.Format("</tbody></table></body></html> ");
+
+
+
+            sw.Write(htmlHead + contenido + htmlFoot);
             sw.WriteLine();
             sw.Close();
 
+            contenido = string.Empty;
+
+            string text = string.Format("Se hagenerado el Archivo HTML en escritorio");
+            MessageBox.Show(text);
         }
 
+        private string CrearHTML(string posso, string Naccho, string Antto, string Gassto, string Transsaccion, string Dettalles) {
 
+            html += string.Format("<tr><th><font color ='blue'> {0} </th></font><td><center>{1}", Transsaccion, posso);
+            html += string.Format("</center></td><td><center>{0}", Naccho);
+            html += string.Format("</center></td><td><center>{0}", Antto);
+            html += string.Format("</center></td><td><center>{0}", Gassto);
+            html += string.Format("</center></td><td><center>{0} </center></td></tr>", Dettalles);
+
+            return  html;
+        }
 
 
 
@@ -473,7 +515,7 @@ namespace CuentasClaras
 
             }
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++) { //usar una variables de nombre similarpero en String en vez de INt esta relacionado a la dificultad de uso de una u otra variabe en las diferentes partes del código, 
 
                 Lista2[i]= Lista2[i];
                
@@ -551,23 +593,23 @@ namespace CuentasClaras
             {
                 checkNacho.Checked = false;
                 CheckAmbos.Checked = false;
-                
-
+             
                 radioDeudaAgregar.Enabled = true;
-                RadioDeudaRestar.Enabled = true;
-                Full2.Enabled = true;
-                checkHalf.Enabled = true;
-
+                RadioDeudaRestar.Enabled = false;
             }
             else {
                 Guardar.Enabled = false;
                 radioDeudaAgregar.Enabled = false;
                 RadioDeudaRestar.Enabled = false;
-                Full2.Enabled = false;
-                checkHalf.Enabled = false;
-
                 radioDeudaAgregar.Checked = false;
                 RadioDeudaRestar.Checked = false;
+
+
+
+                checkHalf.Enabled = false;
+                Full2.Enabled = false;
+                checkHalf.Checked = false;
+                Full2.Checked = false;
             }
 
         }
@@ -579,22 +621,22 @@ namespace CuentasClaras
             {
                 CheckAmbos.Checked = false;
                 checkAnto.Checked = false;
-               
-
-                radioDeudaAgregar.Enabled = true;
-                checkHalf.Enabled = true;
+                radioDeudaAgregar.Enabled = false;
                 RadioDeudaRestar.Enabled = true;
-                Full2.Enabled = true;
+               
             }
             else {
                 Guardar.Enabled = false;
-                radioDeudaAgregar.Enabled = false;
-                checkHalf.Enabled = false;
+                radioDeudaAgregar.Enabled = false;   
                 RadioDeudaRestar.Enabled = false;
-                Full2.Enabled = false;
-
                 radioDeudaAgregar.Checked = false;
                 RadioDeudaRestar.Checked = false;
+
+
+                checkHalf.Enabled = false;
+                Full2.Enabled = false;
+                checkHalf.Checked = false;
+                Full2.Checked = false;
             }
  
 
@@ -603,9 +645,11 @@ namespace CuentasClaras
         public void Refrescar() {
           
             radioDeudaAgregar.Enabled = false;
+
             checkHalf.Enabled = false;
+            Full2.Enabled = false;
+
             RadioDeudaRestar.Enabled = false;
-            Full2.Enabled = true;
             Guardar.Enabled = false;
             radioDeudaAgregar.Checked = false;
             RadioDeudaRestar.Checked = false;
@@ -614,6 +658,7 @@ namespace CuentasClaras
             checkNacho.Checked = false;
             checkHalf.Checked = true;
             MontoGastado.Text = "";
+           
 
         }
 
@@ -808,11 +853,23 @@ namespace CuentasClaras
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             Guardar.Enabled = true;
+
+            if (radioDeudaAgregar.Checked) {      
+
+                Full2.Enabled = true;
+                checkHalf.Enabled = true;
+            }
         }
 
         private void RadioDeudaRestar_CheckedChanged(object sender, EventArgs e)
         {
-            Guardar.Enabled = true;
+            Full2.Enabled = true;
+
+            if (RadioDeudaRestar.Checked)
+            {
+                Full2.Enabled = true;
+                checkHalf.Enabled = true;
+            }
         }
 
         #region
@@ -861,6 +918,10 @@ namespace CuentasClaras
         private string TodaDataEnBase;
         private string MontoTotalAux;
         private string contenido;
+        private string html;
+        private string htmlFull;
+        string htmlHead;
+        string htmlFoot;
 
 
 
