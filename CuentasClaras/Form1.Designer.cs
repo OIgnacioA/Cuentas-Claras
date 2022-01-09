@@ -53,6 +53,7 @@
             this.checkAnto = new System.Windows.Forms.CheckBox();
             this.Full2 = new System.Windows.Forms.CheckBox();
             this.checkHalf = new System.Windows.Forms.CheckBox();
+            this.VerHistorial = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkNacho
@@ -296,11 +297,23 @@
             this.checkHalf.UseVisualStyleBackColor = true;
             this.checkHalf.CheckedChanged += new System.EventHandler(this.checkHalf_CheckedChanged);
             // 
+            // VerHistorial
+            // 
+            this.VerHistorial.Location = new System.Drawing.Point(386, 155);
+            this.VerHistorial.Name = "VerHistorial";
+            this.VerHistorial.Size = new System.Drawing.Size(91, 23);
+            this.VerHistorial.TabIndex = 28;
+            this.VerHistorial.TabStop = false;
+            this.VerHistorial.Text = "Ver  Completo";
+            this.VerHistorial.UseVisualStyleBackColor = true;
+            this.VerHistorial.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 382);
+            this.Controls.Add(this.VerHistorial);
             this.Controls.Add(this.checkHalf);
             this.Controls.Add(this.Full2);
             this.Controls.Add(this.checkAnto);
@@ -360,6 +373,7 @@
         private System.Windows.Forms.CheckBox checkAnto;
         private System.Windows.Forms.CheckBox Full2;
         private System.Windows.Forms.CheckBox checkHalf;
+        private System.Windows.Forms.Button VerHistorial;
     }
 }
 

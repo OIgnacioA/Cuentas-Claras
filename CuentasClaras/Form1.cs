@@ -38,10 +38,15 @@ namespace CuentasClaras
                 Flagg = true; 
                
             }else {
-                MontoEnposo.Text =  PozoDeudaActual;
+
+                MontoTotalAux = CorregirSigno(PozoDeudaActual);
+
+                MontoTotal = Convert.ToInt32(MontoTotalAux);
+                MontoEnposo.Text = MontoTotalAux;
             }
 
-            MontoTotal = Convert.ToInt32(MontoEnposo.Text);
+
+          
 
         }
 
@@ -58,14 +63,14 @@ namespace CuentasClaras
                 if (Full2.Checked)
                 {
 
-                    DialogResult result = MessageBox.Show("Desea que el monto de ( " + MontoGasto + " ) sea Agregada a la deuda?", "Warning",
+                    DialogResult result = MessageBox.Show("Desea que el monto de ( " + MontoGasto + " ) se reste al Fondo?", "Warning",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
                         int Dato = MontoTotal;
                         MontoEnposo.Text = Convert.ToString(MontoTotal - MontoGasto);
                         MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("La deuda ha aumentado de {0}  a  {1}", Dato, MontoTotal);
+                        string text = string.Format("El fondo se ha reducido de {0}  a  {1}", Dato, MontoTotal);
                         MessageBox.Show(text);
                         detalles = MensajeDetalles();
 
@@ -83,14 +88,14 @@ namespace CuentasClaras
                 else if (Full2.Checked == false)
                 {
 
-                    DialogResult result = MessageBox.Show("Desea que la mitad del monto ( " + MontoGasto + " ) sea agregada a la deuda?", "Warning",
+                    DialogResult result = MessageBox.Show("Desea que la mitad del monto :  ( " + MontoGasto + " ),  sea reste al fondo?", "Warning",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
                         int Dato = MontoTotal;
                         MontoEnposo.Text = Convert.ToString(MontoTotal - (MontoGasto / 2));
                         MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("La deuda ha aumentado de {0}  a  {1}", Dato, MontoTotal);
+                        string text = string.Format("El fondo se ha reducido de {0}  a  {1}", Dato, MontoTotal);
                         MessageBox.Show(text);
                         detalles = MensajeDetalles();
                     }
@@ -111,14 +116,14 @@ namespace CuentasClaras
                 if (Full2.Checked)
                 {
 
-                    DialogResult result = MessageBox.Show("Desea que el monto de ( " + MontoGasto + " ) sea restada de la deuda?", "Warning",
+                    DialogResult result = MessageBox.Show("Desea que el monto de: ( " + MontoGasto + " ), se agregue al fondo?", "Warning",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
                         int Dato = MontoTotal;
                         MontoEnposo.Text = Convert.ToString(MontoTotal + MontoGasto);
                         MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("La deuda se ha reducido de {0}  a  {1}", Dato, MontoTotal);
+                        string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
                         MessageBox.Show(text);
                         detalles = MensajeDetalles();
 
@@ -136,14 +141,14 @@ namespace CuentasClaras
                 else if (Full2.Checked == false)
                 {
 
-                    DialogResult result = MessageBox.Show("Desea que la mitad del monto ( " + MontoGasto + " ) sea restada de la deuda?", "Warning",
+                    DialogResult result = MessageBox.Show("Desea que la mitad del monto: ( " + MontoGasto + " ), se agregue al fondo?", "Warning",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
                         int Dato = MontoTotal;
                         MontoEnposo.Text = Convert.ToString(MontoTotal + (MontoGasto / 2));
                         MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("La deuda disminuido de {0}  a  {1}", Dato, MontoTotal);
+                        string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
                         MessageBox.Show(text);
                         detalles = MensajeDetalles();
                     }
@@ -169,14 +174,14 @@ namespace CuentasClaras
 
                 if(MontoNacho > MontoAnto){      
 
-                    DialogResult result = MessageBox.Show("Desea que el monto de ( " + Diferencia + " ) sea restado a la deuda?", "Warning",
+                    DialogResult result = MessageBox.Show("Desea que el monto de: ( " + Diferencia + " ), se agregue al Fondo?", "Warning",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
                         int Dato = MontoTotal;
                         MontoEnposo.Text = Convert.ToString(MontoTotal + Diferencia);
                         MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("La deuda ha disminuido de {0}  a  {1}", Dato, MontoTotal);
+                        string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
                         MessageBox.Show(text);
                         detalles = MensajeDetalles();
 
@@ -195,14 +200,14 @@ namespace CuentasClaras
                 if (MontoNacho < MontoAnto)
                 {
 
-                    DialogResult result = MessageBox.Show("Desea que el monto de ( " + Diferencia + " ) sea agregado a la deuda?", "Warning",
+                    DialogResult result = MessageBox.Show("Desea que el monto de: ( " + Diferencia + " ), sea restado del fondo?", "Warning",
                     MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
                     {
                         int Dato = MontoTotal;
                         MontoEnposo.Text = Convert.ToString(MontoTotal - Diferencia);
                         MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("La deuda ha aumentado de {0}  a  {1}", Dato, MontoTotal);
+                        string text = string.Format("El fondo sehareducido de: {0}  a  {1}", Dato, MontoTotal);
                         MessageBox.Show(text);
                         detalles = MensajeDetalles();
 
@@ -227,6 +232,7 @@ namespace CuentasClaras
             //MontoParcial = CalcularDiferencia(MontoNacho, MontoAnto, MontoTotal);
 
             EscribirBase();
+
             LeerBase();
 
             Refrescar();
@@ -291,6 +297,113 @@ namespace CuentasClaras
 
         }
 
+        public void LeerBase()
+        {
+            Historial.Text = String.Empty;
+            DataEnBase = String.Empty;
+            TodaDataEnBase = String.Empty;
+            string AuxTransaccion = ""; ;
+            try
+            {
+                StreamReader sr = new StreamReader(Path);
+                line = sr.ReadLine();
+
+                while (line != null)
+                {
+                    if (line != "")
+                    {
+                        PozoDeudaActual = line.Substring(0, 5);
+
+
+                        string poso = line.Substring(0, 5);
+                        string posoAux = CorregirSigno(poso);
+                        string Nacho = line.Substring(6, 5);
+                        string Anto = line.Substring(12, 5);
+                        string Gasto = line.Substring(18, 5);
+                        string Transaccion = line.Substring(24, 17);
+                        string Detalles = line.Substring(42, 108);
+
+
+
+                        DataEnBase = string.Format("El ultimo poso fue de: " + posoAux + "$" + "\r\n" + "El gasto de Nacho fue de: " + Nacho + "$" + "\r\n" + "El gasto de anto fue de:" + Anto + "$" + "\r\n" + "El gasto total fue de: " + Gasto + "$" + "\r\n" + "La fecha fue: " + Transaccion + "\r\n" + "Detalle: " + Detalles + "$" + "\r\n" + "\r\n");
+
+                        if (Transaccion != AuxTransaccion)
+                        {
+                            TodaDataEnBase += "------------------------------- Archivo Dia: " + Transaccion + " -----" + "\r\n";
+                        }
+
+                        AuxTransaccion = Transaccion;
+
+                        TodaDataEnBase += DataEnBase;
+
+                        line = sr.ReadLine();
+                    }
+                    else
+                    {
+                        line = sr.ReadLine();
+                    }
+                }
+
+                Historial.Text = DataEnBase;
+                sr.Close();
+                Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Executing finally block.");
+            }
+
+
+        }
+
+        public void AjusteTamaño(string data)
+        {
+            data += "|";
+            int var1 = data.Length;
+            if (var1 < 150)
+            {
+
+                while (var1 != 150)
+                {
+                    data += "-";
+                    var1++;
+                }
+            }
+
+            DATA = data;
+        }
+
+        public String CorregirSigno(string dato) {
+
+            int cont = 0;
+            bool flag = false; 
+
+
+            for (int i = 0; i < dato.Length; i++) {
+                char letra = dato[i];
+
+                if ((letra == '0') && (flag == false)) { 
+                   cont++;  
+
+                }else {
+
+                    flag = true;
+
+                }
+                
+            }
+
+            MontoTotalAux = dato.Substring(cont, (dato.Length - cont));
+
+            return MontoTotalAux;
+        }
+
+        
+
         private int CalcularDiferencia(int monN, int monA, int MonT) {
 
             int Dif = 0;
@@ -353,21 +466,6 @@ namespace CuentasClaras
             }
         }
 
-        public void AjusteTamaño(string data)
-        {
-            data += "|";
-            int var1 = data.Length;
-            if (var1 < 100) {
-
-                while (var1 != 100) {
-                    data += "-";
-                    var1++;
-                }
-            }
-
-            DATA = data;
-        }
-
         public void mensaje(int monto, string nom1, string nom2)
         {
             if (radioCuenta.Checked)
@@ -378,58 +476,13 @@ namespace CuentasClaras
 
         }
 
-        public void LeerBase()
+        private void button1_Click(object sender, EventArgs e)
         {
-            Historial.Text = String.Empty;
-            DataEnBase = String.Empty;
-            try
-            {
-                StreamReader sr = new StreamReader(Path);
-                line = sr.ReadLine();
 
-                while (line != null)
-                {
-                    if (line != "")
-                    {
-                        PozoDeudaActual = line.Substring(0, 5);
-
-
-                        string poso = line.Substring(0, 5);
-                        string Nacho = line.Substring(6, 5);
-                        string Anto = line.Substring(12, 5);
-                        string Gasto = line.Substring(18, 5);
-                        string Transaccion = line.Substring(24, 17);
-                        string Detalles = line.Substring(42, 58);
-
-
-
-                        DataEnBase = string.Format("El ultimo poso fue de: " + poso + "$" + "\r\n" + "El gasto de Nacho fue de: " + Nacho + "$" + "\r\n" + "El gasto de anto fue de:" + Anto  + "$" + "\r\n" + "El gasto total fue de: " + Gasto + "$" + "\r\n" + "La fecha fue: " + Transaccion + "\r\n" + "Detalle: " + Detalles + "$" ); 
-                        line = sr.ReadLine();
-                    }
-                    else
-                    {
-                        line = sr.ReadLine();
-                    }
-                }
-
-                Historial.Text = DataEnBase;
-                sr.Close();
-                Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
-
+            LeerBase(); 
+            Historial.Text = TodaDataEnBase;
 
         }
-
-
-
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
@@ -545,6 +598,7 @@ namespace CuentasClaras
             MontoGastado.Text = "";
 
         }
+
         public void MensajesDatos()
         {
 
@@ -614,14 +668,14 @@ namespace CuentasClaras
             string texto;
             string textoMemoria = "";
 
-            texto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 30 caracteres)", "Detalles de gasto ", "0", 200, 200);
+            texto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 80 caracteres)", "Detalles de gasto ", "0", 200, 200);
 
-            while (texto.Length > 30)
+            while (texto.Length > 80)
             {
                 textoMemoria = texto;
-                string text = string.Format("La cantidad de caracteres no debe ser mayor a 30");
+                string text = string.Format("La cantidad de caracteres no debe ser mayor a 80");
                 MessageBox.Show(text);
-                texto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 10 caracteres)", "Detalles de gasto ", textoMemoria, 500, 500);
+                texto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese detalles:palabras clave (hasta 80 caracteres)", "Detalles de gasto ", textoMemoria, 500, 500);
 
             }
 
@@ -650,17 +704,6 @@ namespace CuentasClaras
                 Full2.Checked = true;
             }
         }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            Guardar.Enabled = true;
-        }
-        private void RadioDeudaRestar_CheckedChanged(object sender, EventArgs e)
-        {
-            Guardar.Enabled = true;
-        }
-
-
 
         private void MontoNacho2_TextChanged(object sender, EventArgs e)
         {
@@ -744,6 +787,15 @@ namespace CuentasClaras
             }
         }
 
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            Guardar.Enabled = true;
+        }
+
+        private void RadioDeudaRestar_CheckedChanged(object sender, EventArgs e)
+        {
+            Guardar.Enabled = true;
+        }
 
         #region
         private void textBox2_TextChanged(object sender, EventArgs e){
@@ -764,8 +816,6 @@ namespace CuentasClaras
 
 
         }
-
-    
 
         #endregion
 
@@ -790,17 +840,10 @@ namespace CuentasClaras
         private string MontoAntoS;
         private string MontoGastoS;
         private string DATA;
+        private string TodaDataEnBase;
+        private string MontoTotalAux;
 
-     
     }
 
-
-    /*001000 | 1111 | Fecha:4 / 1 / 2022 00:00:00
-
-    002000 | 2222 | Fecha:4 / 1 / 2022 00:00:00
-
-    003000 | 3333 | Fecha:4 / 1 / 2022 00:00:00
-
-    004000 | 4444 | Fecha:4 / 1 / 2022 00:00:00*/
 
 }
