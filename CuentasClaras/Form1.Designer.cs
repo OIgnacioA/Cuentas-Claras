@@ -54,6 +54,7 @@
             this.Full2 = new System.Windows.Forms.CheckBox();
             this.checkHalf = new System.Windows.Forms.CheckBox();
             this.VerHistorial = new System.Windows.Forms.Button();
+            this.GenerarArchivo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkNacho
@@ -101,7 +102,7 @@
             this.Historial.Multiline = true;
             this.Historial.Name = "Historial";
             this.Historial.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Historial.Size = new System.Drawing.Size(398, 173);
+            this.Historial.Size = new System.Drawing.Size(398, 149);
             this.Historial.TabIndex = 6;
             // 
             // label2
@@ -308,11 +309,22 @@
             this.VerHistorial.UseVisualStyleBackColor = true;
             this.VerHistorial.Click += new System.EventHandler(this.button1_Click);
             // 
+            // GenerarArchivo
+            // 
+            this.GenerarArchivo.Location = new System.Drawing.Point(538, 347);
+            this.GenerarArchivo.Name = "GenerarArchivo";
+            this.GenerarArchivo.Size = new System.Drawing.Size(164, 23);
+            this.GenerarArchivo.TabIndex = 29;
+            this.GenerarArchivo.Text = "Generar Archivo";
+            this.GenerarArchivo.UseVisualStyleBackColor = true;
+            this.GenerarArchivo.Click += new System.EventHandler(this.GenerarArchivo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 382);
+            this.Controls.Add(this.GenerarArchivo);
             this.Controls.Add(this.VerHistorial);
             this.Controls.Add(this.checkHalf);
             this.Controls.Add(this.Full2);
@@ -374,6 +386,7 @@
         private System.Windows.Forms.CheckBox Full2;
         private System.Windows.Forms.CheckBox checkHalf;
         private System.Windows.Forms.Button VerHistorial;
+        private System.Windows.Forms.Button GenerarArchivo;
     }
 }
 

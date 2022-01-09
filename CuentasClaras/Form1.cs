@@ -293,6 +293,7 @@ namespace CuentasClaras
                 Console.WriteLine("Executing finally block.");
             }
 
+
             LeerBase();
 
         }
@@ -335,7 +336,7 @@ namespace CuentasClaras
                         AuxTransaccion = Transaccion;
 
                         TodaDataEnBase += DataEnBase;
-
+                        contenido = TodaDataEnBase;
                         line = sr.ReadLine();
                     }
                     else
@@ -402,7 +403,24 @@ namespace CuentasClaras
             return MontoTotalAux;
         }
 
-        
+        private void GenerarArchivo_Click(object sender, EventArgs e)
+        {
+  
+            string patth = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string html = string.Format("{0}\\archivo.html",patth);
+
+            StreamWriter sw = new System.IO.StreamWriter(html);
+
+            sw.Write(contenido);
+            sw.WriteLine();
+            sw.Close();
+
+        }
+
+
+
+
+
 
         private int CalcularDiferencia(int monN, int monA, int MonT) {
 
@@ -842,6 +860,9 @@ namespace CuentasClaras
         private string DATA;
         private string TodaDataEnBase;
         private string MontoTotalAux;
+        private string contenido;
+
+
 
     }
 
