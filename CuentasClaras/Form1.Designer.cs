@@ -130,7 +130,6 @@
             this.MontoEnposo.Name = "MontoEnposo";
             this.MontoEnposo.Size = new System.Drawing.Size(376, 20);
             this.MontoEnposo.TabIndex = 9;
-            this.MontoEnposo.Text = "-20";
             this.MontoEnposo.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // Guardar
@@ -149,7 +148,6 @@
             this.MontoGastado.Name = "MontoGastado";
             this.MontoGastado.Size = new System.Drawing.Size(125, 20);
             this.MontoGastado.TabIndex = 12;
-            this.MontoGastado.Text = "2000";
             this.MontoGastado.TextChanged += new System.EventHandler(this.MontoGastado_TextChanged);
             // 
             // label4
@@ -279,7 +277,7 @@
             // Full2
             // 
             this.Full2.AutoSize = true;
-            this.Full2.Location = new System.Drawing.Point(62, 256);
+            this.Full2.Location = new System.Drawing.Point(60, 261);
             this.Full2.Name = "Full2";
             this.Full2.Size = new System.Drawing.Size(42, 17);
             this.Full2.TabIndex = 26;
@@ -290,7 +288,7 @@
             // checkHalf
             // 
             this.checkHalf.AutoSize = true;
-            this.checkHalf.Location = new System.Drawing.Point(162, 256);
+            this.checkHalf.Location = new System.Drawing.Point(160, 261);
             this.checkHalf.Name = "checkHalf";
             this.checkHalf.Size = new System.Drawing.Size(45, 17);
             this.checkHalf.TabIndex = 27;

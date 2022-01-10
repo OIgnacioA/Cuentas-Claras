@@ -56,6 +56,12 @@ namespace CuentasClaras
         private void Guardar_Click(object sender, EventArgs e)
         {
 
+            if (MontoGastado.Text == "") {
+
+                MontoGastado.Text = Microsoft.VisualBasic.Interaction.InputBox("No ha ingresado Un Valor de Gasto", "Monto Gastado- ", "0", 200, 200);
+
+            }
+
             MontoGasto = Convert.ToInt32(MontoGastado.Text);
 
             if (radioDeudaAgregar.Checked){
@@ -113,6 +119,7 @@ namespace CuentasClaras
 
             if (RadioDeudaRestar.Checked) {
 
+              
 
                 if (Full2.Checked)
                 {
@@ -530,7 +537,7 @@ namespace CuentasClaras
         {
             if (radioCuenta.Checked)
             {
-                string text = string.Format("{0} debe pagar a {1} un total de {3} pesukos", monto, nom1, nom2);
+                string text = string.Format("{0} debe pagar a {1} un total de {2} pesukos", nom1, nom2, monto);
                 MessageBox.Show(text);
             }
 
@@ -550,7 +557,6 @@ namespace CuentasClaras
             {
                 checkNacho.Checked = false;
                 checkAnto.Checked = false;
-                checkHalf.Checked = true;
                 Full2.Checked = false;
 
                 MontoNacho2.Enabled = true;
@@ -563,6 +569,10 @@ namespace CuentasClaras
                 Full2.Enabled = false;           
                 checkHalf.Enabled = false;
                 Guardar.Enabled = true;
+
+                
+                radioCuenta.Enabled = true;
+
             }
             else
             {
@@ -593,21 +603,30 @@ namespace CuentasClaras
             {
                 checkNacho.Checked = false;
                 CheckAmbos.Checked = false;
-             
+                checkHalf.Checked = false;
+                Full2.Checked = false;
+                radioCuenta.Checked = false;
+                radioCuenta.Enabled = false;
                 radioDeudaAgregar.Enabled = true;
                 RadioDeudaRestar.Enabled = false;
+
+                Guardar.Enabled = false;
+
+                radioDeudaAgregar.Focus();              
             }
             else {
+
                 Guardar.Enabled = false;
                 radioDeudaAgregar.Enabled = false;
                 RadioDeudaRestar.Enabled = false;
-                radioDeudaAgregar.Checked = false;
-                RadioDeudaRestar.Checked = false;
-
-
-
                 checkHalf.Enabled = false;
                 Full2.Enabled = false;
+                radioCuenta.Checked = false;
+                radioCuenta.Enabled = false;
+
+
+                radioDeudaAgregar.Checked = false;
+                RadioDeudaRestar.Checked = false;
                 checkHalf.Checked = false;
                 Full2.Checked = false;
             }
@@ -619,29 +638,43 @@ namespace CuentasClaras
 
             if (checkNacho.Checked)
             {
-                CheckAmbos.Checked = false;
                 checkAnto.Checked = false;
+                CheckAmbos.Checked = false;
+                checkHalf.Checked = false;
+                Full2.Checked = false;
+                radioCuenta.Checked = false;
+                radioCuenta.Enabled = false;
                 radioDeudaAgregar.Enabled = false;
                 RadioDeudaRestar.Enabled = true;
-               
+
+                Guardar.Enabled = false;
+
+                RadioDeudaRestar.Focus();
+
             }
-            else {
+            else if (checkNacho.Checked == false) {
+
                 Guardar.Enabled = false;
                 radioDeudaAgregar.Enabled = false;   
                 RadioDeudaRestar.Enabled = false;
-                radioDeudaAgregar.Checked = false;
-                RadioDeudaRestar.Checked = false;
-
-
                 checkHalf.Enabled = false;
                 Full2.Enabled = false;
+                radioCuenta.Checked = false;
+                radioCuenta.Enabled = false;
+
+
+                radioDeudaAgregar.Checked = false;
+                RadioDeudaRestar.Checked = false;
                 checkHalf.Checked = false;
                 Full2.Checked = false;
+  
             }
  
 
         }
        
+        
+
         public void Refrescar() {
           
             radioDeudaAgregar.Enabled = false;
@@ -656,7 +689,9 @@ namespace CuentasClaras
             CheckAmbos.Checked = false;
             checkAnto.Checked = false;
             checkNacho.Checked = false;
-            checkHalf.Checked = true;
+            checkHalf.Checked = false;
+            radioCuenta.Checked = false;
+            radioCuenta.Enabled = false;
             MontoGastado.Text = "";
            
 
@@ -750,10 +785,14 @@ namespace CuentasClaras
             if (Full2.Checked)
             {
                 checkHalf.Checked = false;
+                Guardar.Enabled = true;
+                Guardar.Focus();
             }
             else {
-                checkHalf.Checked = true;
+                //checkHalf.Checked = true;
+                Guardar.Enabled = false;
             }
+
         }
 
         private void checkHalf_CheckedChanged(object sender, EventArgs e)
@@ -761,11 +800,15 @@ namespace CuentasClaras
             if (checkHalf.Checked)
             {
                 Full2.Checked = false;
+                Guardar.Enabled = true;
+                Guardar.Focus();
             }
             else
             {
-                Full2.Checked = true;
+                //Full2.Checked = true;
+                Guardar.Enabled = false;
             }
+        
         }
 
         private void MontoNacho2_TextChanged(object sender, EventArgs e)
@@ -852,8 +895,7 @@ namespace CuentasClaras
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            Guardar.Enabled = true;
-
+  
             if (radioDeudaAgregar.Checked) {      
 
                 Full2.Enabled = true;
@@ -863,7 +905,6 @@ namespace CuentasClaras
 
         private void RadioDeudaRestar_CheckedChanged(object sender, EventArgs e)
         {
-            Full2.Enabled = true;
 
             if (RadioDeudaRestar.Checked)
             {
