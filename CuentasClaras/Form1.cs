@@ -20,7 +20,9 @@ namespace CuentasClaras
             MontoAnto2.Enabled = false;
             label6.Enabled = false;
             label5.Enabled = false;
-            Path = "BaseDeDatos.txt";
+            
+            desktt  = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
+            Path = desktt +  "\\zacoa.txt" ;
 
             Refrescar();
 
@@ -250,7 +252,7 @@ namespace CuentasClaras
 
         public void EscribirBase()
         {
-            StreamWriter sw = new StreamWriter(Path, true);
+            using (StreamWriter sw = new StreamWriter(Path, true)) { 
             
             try
             {
@@ -301,7 +303,7 @@ namespace CuentasClaras
                 Console.WriteLine("Executing finally block.");
             }
 
-
+            }
             LeerBase();
 
         }
@@ -312,53 +314,56 @@ namespace CuentasClaras
             DataEnBase = String.Empty;
             TodaDataEnBase = String.Empty;
             string AuxTransaccion = ""; ;
-            try
-            {
-                StreamReader sr = new StreamReader(Path);
-                line = sr.ReadLine();
 
-                while (line != null)
-                {
-                    if (line != "")
+            using (StreamReader sr = new StreamReader(Path))
+            { 
+
+                try{
+                
+                    line = sr.ReadLine();
+
+                    while (line != null)
                     {
-                        PozoDeudaActual = line.Substring(0, 5);
-
-
-                        string poso = line.Substring(0, 5);
-                        string posoAux = CorregirSigno(poso);
-                        string Anto = line.Substring(6, 5);
-                        string Nacho = line.Substring(12, 5);
-                        string Gasto = line.Substring(18, 5);
-                        string Transaccion = line.Substring(24, 17);
-                        string Detalles = line.Substring(42, 108);
-
-
-
-                        DataEnBase = string.Format("El ultimo poso fue de: " + posoAux + "$" + "\r\n" + "El gasto de Nacho fue de: " + Nacho + "$" + "\r\n" + "El gasto de anto fue de:" + Anto + "$" + "\r\n" + "El gasto total fue de: " + Gasto + "$" + "\r\n" + "La fecha fue: " + Transaccion + "\r\n" + "Detalle: " + Detalles + "$" + "\r\n" + "\r\n");
-
-                        if (Transaccion != AuxTransaccion)
+                        if (line != "")
                         {
-                            TodaDataEnBase += "------------------------------- Archivo Dia: " + Transaccion + " -----" + "\r\n";
+                            PozoDeudaActual = line.Substring(0, 5);
+
+
+                            string poso = line.Substring(0, 5);
+                            string posoAux = CorregirSigno(poso);
+                            string Anto = line.Substring(6, 5);
+                            string Nacho = line.Substring(12, 5);
+                            string Gasto = line.Substring(18, 5);
+                            string Transaccion = line.Substring(24, 17);
+                            string Detalles = line.Substring(42, 108);
+
+
+
+                            DataEnBase = string.Format("El ultimo poso fue de: " + posoAux + "$" + "\r\n" + "El gasto de Nacho fue de: " + Nacho + "$" + "\r\n" + "El gasto de anto fue de:" + Anto + "$" + "\r\n" + "El gasto total fue de: " + Gasto + "$" + "\r\n" + "La fecha fue: " + Transaccion + "\r\n" + "Detalle: " + Detalles + "$" + "\r\n" + "\r\n");
+
+                            if (Transaccion != AuxTransaccion)
+                            {
+                                TodaDataEnBase += "------------------------------- Archivo Dia: " + Transaccion + " -----" + "\r\n";
+                            }
+
+                            AuxTransaccion = Transaccion;
+
+                            TodaDataEnBase += DataEnBase;
+
+                            contenido = CrearHTML(poso, Nacho, Anto, Gasto, Transaccion, Detalles);
+
+                            line = sr.ReadLine();
                         }
-
-                        AuxTransaccion = Transaccion;
-
-                        TodaDataEnBase += DataEnBase;
-                       
-                        contenido = CrearHTML(poso, Nacho, Anto, Gasto, Transaccion, Detalles); 
-
-                        line = sr.ReadLine();
+                        else
+                        {
+                            line = sr.ReadLine();
+                        }
                     }
-                    else
-                    {
-                        line = sr.ReadLine();
-                    }
+
+                    Historial.Text = DataEnBase;
+                    sr.Close();
+                    //Console.ReadLine();
                 }
-
-                Historial.Text = DataEnBase;
-                sr.Close();
-                //Console.ReadLine();
-            }
             catch (Exception e)
             {
                 Console.WriteLine("Exception: " + e.Message);
@@ -367,9 +372,12 @@ namespace CuentasClaras
             {
                 Console.WriteLine("Executing finally block.");
             }
-
+            
+            }
 
         }
+
+        
 
         public void AjusteTamaño(string data)
         {
@@ -961,8 +969,9 @@ namespace CuentasClaras
         private string contenido;
         private string html;
         private string htmlFull;
-        string htmlHead;
-        string htmlFoot;
+        private string htmlHead;
+        private string htmlFoot;
+        private string desktt;
 
 
 
