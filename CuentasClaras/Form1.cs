@@ -35,11 +35,11 @@ namespace CuentasClaras
                 MontoTotal = Convert.ToInt32(MontoEnposo.Text);
 
                 AjusteTamaño(MontoTotal, 0, 0, 0);
-                detalles = "Inicio de sesion---";
+                
+                Flagg = true;
                 EscribirBase();
-                Flagg = true; 
-               
-            }else {
+            }
+            else {
 
                 MontoTotalAux = CorregirSigno(PozoDeudaActual);
 
@@ -58,250 +58,303 @@ namespace CuentasClaras
         private void Guardar_Click(object sender, EventArgs e)
         {
 
-            if (MontoGastado.Text == "") {
+            Pass = true; 
 
-                MontoGastado.Text = Microsoft.VisualBasic.Interaction.InputBox("No ha ingresado Un Valor de Gasto", "Monto Gastado- ", "0", 200, 200);
+             try
+             {
+                    int pru1;
+                    int pru2;
+                    int pru3;
 
-            }
+                    pru1 = Convert.ToInt32(MontoGastado.Text);
+                    pru2 = Convert.ToInt32(MontoNacho2.Text);
+                    pru3 = Convert.ToInt32(MontoAnto2.Text);
+             }catch (Exception ex)
+             {
 
-            MontoGasto = Convert.ToInt32(MontoGastado.Text);
+                    string mensaje = string.Format("Los ingresados no son correctos- Reveer. ");
+                    MessageBox.Show(mensaje);
 
-            if (radioDeudaAgregar.Checked){
+                    MontoGastado.Text = "0";
+                    MontoNacho2.Text = "0";
+                    MontoNacho2.Text = "0";
+
+                    Refrescar();
+                    Pass = false; 
+             }
+
+
+
+
+
+
+
+                if ( Pass ==  true  ) { 
+
+
+
+
+
+
+                if (MontoGastado.Text == "") {
+
+                    MontoGastado.Text = Microsoft.VisualBasic.Interaction.InputBox("No ha ingresado Un Valor de Gasto", "Monto Gastado- ", "0", 200, 200);
+
+                }
+
+                MontoGasto = Convert.ToInt32(MontoGastado.Text);
+
+                if (radioDeudaAgregar.Checked){
 
    
-                if (Full2.Checked)
-                {
-
-                    DialogResult result = MessageBox.Show("Desea que el monto de ( " + MontoGasto + " ) se reste al Fondo?", "Warning",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
+                    if (Full2.Checked)
                     {
-                        int Dato = MontoTotal;
-                        MontoEnposo.Text = Convert.ToString(MontoTotal - MontoGasto);
-                        MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("El fondo se ha reducido de {0}  a  {1}", Dato, MontoTotal);
-                        MessageBox.Show(text);
-                        detalles = MensajeDetalles();
 
-                    }
-                    else if (result == DialogResult.No)
-                    {
+                        DialogResult result = MessageBox.Show("Desea que el monto de ( " + MontoGasto + " ) se reste al Fondo?", "Warning",
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int Dato = MontoTotal;
+                            MontoEnposo.Text = Convert.ToString(MontoTotal - MontoGasto);
+                            MontoTotal = Convert.ToInt32(MontoEnposo.Text);
+                            string text = string.Format("El fondo se ha reducido de {0}  a  {1}", Dato, MontoTotal);
+                            MessageBox.Show(text);
+                            detalles = MensajeDetalles();
+
+                        }
+                        else if (result == DialogResult.No)
+                        {
                         
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
+                        }
+                        else if (result == DialogResult.Cancel)
+                        {
                         
-                    }
+                        }
 
+                    }
+                    else if (Full2.Checked == false)
+                    {
+
+                        DialogResult result = MessageBox.Show("Desea que la mitad del monto :  ( " + MontoGasto + " ),  sea reste al fondo?", "Warning",
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int Dato = MontoTotal;
+                            MontoEnposo.Text = Convert.ToString(MontoTotal - (MontoGasto / 2));
+                            MontoTotal = Convert.ToInt32(MontoEnposo.Text);
+                            string text = string.Format("El fondo se ha reducido de {0}  a  {1}", Dato, MontoTotal);
+                            MessageBox.Show(text);
+                            detalles = MensajeDetalles();
+                        }
+                        else if (result == DialogResult.No)
+                        {
+                        
+                        }
+                        else if (result == DialogResult.Cancel)
+                        {
+                        
+                        }
+                    }
                 }
-                else if (Full2.Checked == false)
-                {
 
-                    DialogResult result = MessageBox.Show("Desea que la mitad del monto :  ( " + MontoGasto + " ),  sea reste al fondo?", "Warning",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        int Dato = MontoTotal;
-                        MontoEnposo.Text = Convert.ToString(MontoTotal - (MontoGasto / 2));
-                        MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("El fondo se ha reducido de {0}  a  {1}", Dato, MontoTotal);
-                        MessageBox.Show(text);
-                        detalles = MensajeDetalles();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
-                        
-                    }
-                }
-            }
-
-            if (RadioDeudaRestar.Checked) {
+                if (RadioDeudaRestar.Checked) {
 
               
 
-                if (Full2.Checked)
-                {
-
-                    DialogResult result = MessageBox.Show("Desea que el monto de: ( " + MontoGasto + " ), se agregue al fondo?", "Warning",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
+                    if (Full2.Checked)
                     {
-                        int Dato = MontoTotal;
-                        MontoEnposo.Text = Convert.ToString(MontoTotal + MontoGasto);
-                        MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
-                        MessageBox.Show(text);
-                        detalles = MensajeDetalles();
 
-                    }
-                    else if (result == DialogResult.No)
-                    {
+                        DialogResult result = MessageBox.Show("Desea que el monto de: ( " + MontoGasto + " ), se agregue al fondo?", "Warning",
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int Dato = MontoTotal;
+                            MontoEnposo.Text = Convert.ToString(MontoTotal + MontoGasto);
+                            MontoTotal = Convert.ToInt32(MontoEnposo.Text);
+                            string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
+                            MessageBox.Show(text);
+                            detalles = MensajeDetalles();
+
+                        }
+                        else if (result == DialogResult.No)
+                        {
                        
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
+                        }
+                        else if (result == DialogResult.Cancel)
+                        {
                        
-                    }
+                        }
 
-                }
-                else if (Full2.Checked == false)
-                {
-
-                    DialogResult result = MessageBox.Show("Desea que la mitad del monto: ( " + MontoGasto + " ), se agregue al fondo?", "Warning",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        int Dato = MontoTotal;
-                        MontoEnposo.Text = Convert.ToString(MontoTotal + (MontoGasto / 2));
-                        MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
-                        MessageBox.Show(text);
-                        detalles = MensajeDetalles();
                     }
-                    else if (result == DialogResult.No)
+                    else if (Full2.Checked == false)
                     {
+
+                        DialogResult result = MessageBox.Show("Desea que la mitad del monto: ( " + MontoGasto + " ), se agregue al fondo?", "Warning",
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int Dato = MontoTotal;
+                            MontoEnposo.Text = Convert.ToString(MontoTotal + (MontoGasto / 2));
+                            MontoTotal = Convert.ToInt32(MontoEnposo.Text);
+                            string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
+                            MessageBox.Show(text);
+                            detalles = MensajeDetalles();
+                        }
+                        else if (result == DialogResult.No)
+                        {
                         
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
+                        }
+                        else if (result == DialogResult.Cancel)
+                        {
                         
+                        }
                     }
+
                 }
 
-            }
-
-            if (CheckAmbos.Checked){
+                if (CheckAmbos.Checked){
 
 
-                MontoNacho = Convert.ToInt32(MontoNacho2.Text);
-                MontoAnto = Convert.ToInt32(MontoAnto2.Text);
+                    MontoNacho = Convert.ToInt32(MontoNacho2.Text);
+                    MontoAnto = Convert.ToInt32(MontoAnto2.Text);
 
-                Diferencia = CalcularDiferencia(MontoNacho, MontoAnto, MontoTotal);
+                    Diferencia = CalcularDiferencia(MontoNacho, MontoAnto, MontoTotal);
 
-                if(MontoNacho > MontoAnto){      
+                    if(MontoNacho > MontoAnto){      
 
-                    DialogResult result = MessageBox.Show("Desea que el monto de: ( " + Diferencia + " ), se agregue al Fondo?", "Warning",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        int Dato = MontoTotal;
-                        MontoEnposo.Text = Convert.ToString(MontoTotal + Diferencia);
-                        MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
-                        MessageBox.Show(text);
-                        detalles = MensajeDetalles();
+                        DialogResult result = MessageBox.Show("Desea que el monto de: ( " + Diferencia + " ), se agregue al Fondo?", "Warning",
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int Dato = MontoTotal;
+                            MontoEnposo.Text = Convert.ToString(MontoTotal + Diferencia);
+                            MontoTotal = Convert.ToInt32(MontoEnposo.Text);
+                            string text = string.Format("El fondo ha crecido de {0}  a  {1}", Dato, MontoTotal);
+                            MessageBox.Show(text);
+                            detalles = MensajeDetalles();
 
-                    }
-                    else if (result == DialogResult.No)
-                    {
+                        }
+                        else if (result == DialogResult.No)
+                        {
                        
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
+                        }
+                        else if (result == DialogResult.Cancel)
+                        {
                         
+                        }
+
+                    }
+
+                    if (MontoNacho < MontoAnto)
+                    {
+
+                        DialogResult result = MessageBox.Show("Desea que el monto de: ( " + Diferencia + " ), sea restado del fondo?", "Warning",
+                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                        if (result == DialogResult.Yes)
+                        {
+                            int Dato = MontoTotal;
+                            MontoEnposo.Text = Convert.ToString(MontoTotal - Diferencia);
+                            MontoTotal = Convert.ToInt32(MontoEnposo.Text);
+                            string text = string.Format("El fondo sehareducido de: {0}  a  {1}", Dato, MontoTotal);
+                            MessageBox.Show(text);
+                            detalles = MensajeDetalles();
+
+                        }
+                        else if (result == DialogResult.No)
+                        {
+                       
+                        }
+                        else if (result == DialogResult.Cancel)
+                        {
+                       
+                        }
+
                     }
 
                 }
 
-                if (MontoNacho < MontoAnto)
-                {
-
-                    DialogResult result = MessageBox.Show("Desea que el monto de: ( " + Diferencia + " ), sea restado del fondo?", "Warning",
-                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-                    if (result == DialogResult.Yes)
-                    {
-                        int Dato = MontoTotal;
-                        MontoEnposo.Text = Convert.ToString(MontoTotal - Diferencia);
-                        MontoTotal = Convert.ToInt32(MontoEnposo.Text);
-                        string text = string.Format("El fondo sehareducido de: {0}  a  {1}", Dato, MontoTotal);
-                        MessageBox.Show(text);
-                        detalles = MensajeDetalles();
-
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                       
-                    }
-                    else if (result == DialogResult.Cancel)
-                    {
-                       
-                    }
-
-                }
-
-            }
 
 
+                AjusteTamaño(MontoTotal, MontoNacho, MontoAnto, MontoGasto);
 
-            AjusteTamaño(MontoTotal, MontoNacho, MontoAnto, MontoGasto);
+                //MontoParcial = CalcularDiferencia(MontoNacho, MontoAnto, MontoTotal);
 
-            //MontoParcial = CalcularDiferencia(MontoNacho, MontoAnto, MontoTotal);
+                EscribirBase();
 
-            EscribirBase();
+                LeerBase();
 
-            LeerBase();
-
-            Refrescar();
+                Refrescar();
           
 
+            }
         }
+
+
+
 
         public void EscribirBase()
         {
-            using (StreamWriter sw = new StreamWriter(Path, true)) { 
-            
-            try
-            {
+            using (StreamWriter sw = new StreamWriter(Path, true)) {
 
-                fechaTransaccion = fecha.Value.Date.ToString();
-
-                if (radioDeudaAgregar.Checked)
+                try
                 {
 
-                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoGastoS, MontoAntoS, MontoNachoS, fechaTransaccion, detalles);
-                    AjusteTamaño(DATA);                    
+                    fechaTransaccion = fecha.Value.Date.ToString(); // Solo promera vez
 
-                    sw.WriteLine(DATA + System.Environment.NewLine);
-                    sw.Close();
+                    if (Flagg == true)
+                    {
+                        detalles = string.Format("Inicio de sesion con {0} del dìa {1}", MontoTotalS, fechaTransaccion);
+
+                        DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoAntoS, MontoNachoS, MontoGastoS, fechaTransaccion, detalles);
+                        AjusteTamaño(DATA);
+
+
+                        sw.WriteLine(DATA + System.Environment.NewLine);
+                        sw.Close();
+
+                    }
+
+                    if (radioDeudaAgregar.Checked)
+                    {
+
+                        DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoAntoS, MontoNachoS, MontoGastoS, fechaTransaccion, detalles);
+                        AjusteTamaño(DATA);
+
+                        sw.WriteLine(DATA + System.Environment.NewLine);
+                        sw.Close();
+
+                    }
+                    else if (RadioDeudaRestar.Checked)
+                    {
+
+                        DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoAntoS, MontoNachoS, MontoGastoS, fechaTransaccion, detalles);
+                        AjusteTamaño(DATA);
+
+                        sw.WriteLine(DATA + System.Environment.NewLine);
+                        sw.Close();
+                    }
+
+
+                    if (CheckAmbos.Checked)
+                    {
+                        DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoAntoS, MontoNachoS, MontoGastoS, fechaTransaccion, detalles);
+                        AjusteTamaño(DATA);
+
+                        sw.WriteLine(DATA + System.Environment.NewLine);
+                        sw.Close();
+
+                    }
+
 
                 }
-                else if (RadioDeudaRestar.Checked)
+                catch (Exception e)
                 {
-
-                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, "00000", "00000", MontoGastoS, fechaTransaccion, detalles);
-                    AjusteTamaño(DATA);
-                   
-                    sw.WriteLine(DATA + System.Environment.NewLine);
-                    sw.Close();
+                    Console.WriteLine("Exception: " + e.Message);
                 }
-
-                if ((radioDeudaAgregar.Checked) && (Flagg == true))
+                finally
                 {
-                    DATA = string.Format("{0}|{1}|{2}|{3}|{4}|{5}", MontoTotalS, MontoAntoS, MontoNachoS, MontoGastoS, fechaTransaccion, detalles);
-                    AjusteTamaño(DATA);
-                  
-                   
-                    sw.WriteLine(DATA + System.Environment.NewLine);
-                    sw.Close();
-
-                    Flagg = false;
-
+                    Console.WriteLine("Executing finally block.");
                 }
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
 
             }
             LeerBase();
@@ -339,7 +392,22 @@ namespace CuentasClaras
 
 
 
-                            DataEnBase = string.Format("El ultimo poso fue de: " + posoAux + "$" + "\r\n" + "El gasto de Nacho fue de: " + Nacho + "$" + "\r\n" + "El gasto de anto fue de:" + Anto + "$" + "\r\n" + "El gasto total fue de: " + Gasto + "$" + "\r\n" + "La fecha fue: " + Transaccion + "\r\n" + "Detalle: " + Detalles + "$" + "\r\n" + "\r\n");
+                            VerMaximoDeBarra(Int32.Parse(posoAux)); 
+
+
+                            if (Flagg == true){
+
+                                DataEnBase = string.Format("El poso comienza en : " + posoAux + "$" + "\r\n");
+
+                                Flagg = false; 
+
+                            } else { 
+
+                                DataEnBase = string.Format("El ultimo poso fue de: " + posoAux + "$" + "\r\n" + "El gasto de Nacho fue de: " + Nacho + "$" + "\r\n" + "El gasto de anto fue de:" + Anto + "$" + "\r\n" + "El gasto total fue de: " + Gasto + "$" + "\r\n" + "La fecha fue: " + Transaccion + "\r\n" + "Detalle: " + Detalles + "$" + "\r\n" + "\r\n");
+                           
+                            
+                            }
+
 
                             if (Transaccion != AuxTransaccion)
                             {
@@ -377,7 +445,15 @@ namespace CuentasClaras
 
         }
 
-        
+
+        public void VerMaximoDeBarra(int poso) {
+
+            if (poso < 0 ) { maximodeBarra = poso * -1;}
+            if (poso >= 0) { maximodeBarra = 100; barra.Value = 100;}
+
+        }
+
+
 
         public void AjusteTamaño(string data)
         {
@@ -824,6 +900,7 @@ namespace CuentasClaras
             int var1;
             int var2;
 
+
             if (MontoGastado.Text != "")
             {
 
@@ -972,6 +1049,8 @@ namespace CuentasClaras
         private string htmlHead;
         private string htmlFoot;
         private string desktt;
+        private int maximodeBarra;
+        private bool Pass; 
 
 
 

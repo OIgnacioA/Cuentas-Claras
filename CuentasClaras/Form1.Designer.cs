@@ -31,7 +31,7 @@
             this.checkNacho = new System.Windows.Forms.CheckBox();
             this.CheckAmbos = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.barra = new System.Windows.Forms.ProgressBar();
             this.Historial = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -89,12 +89,12 @@
             this.label1.Text = "Historial";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // progressBar1
+            // barra
             // 
-            this.progressBar1.Location = new System.Drawing.Point(326, 93);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(381, 23);
-            this.progressBar1.TabIndex = 4;
+            this.barra.Location = new System.Drawing.Point(326, 93);
+            this.barra.Name = "barra";
+            this.barra.Size = new System.Drawing.Size(381, 23);
+            this.barra.TabIndex = 4;
             // 
             // Historial
             // 
@@ -198,9 +198,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(323, 77);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(154, 13);
+            this.label7.Size = new System.Drawing.Size(157, 13);
             this.label7.TabIndex = 17;
-            this.label7.Text = "Porcentaje dedeuda Paga del: ";
+            this.label7.Text = "Porcentaje de deuda Paga del: ";
             // 
             // label8
             // 
@@ -345,7 +345,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Historial);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.barra);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CheckAmbos);
             this.Controls.Add(this.checkNacho);
@@ -361,7 +361,7 @@
         private System.Windows.Forms.CheckBox checkNacho;
         private System.Windows.Forms.CheckBox CheckAmbos;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar barra;
         private System.Windows.Forms.TextBox Historial;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
