@@ -23,7 +23,7 @@ namespace CuentasClaras
             
             desktt  = Environment.GetFolderPath (Environment.SpecialFolder.Desktop);
             Path = desktt +  "\\zacoa.txt" ;
-
+            EscribirBase();
             Refrescar();
 
             LeerBase();
