@@ -1,0 +1,15 @@
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.csproj.AssemblyReference.cache
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.csproj.SuggestedBindingRedirects.cache
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.Properties.Resources.resources
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.csproj.GenerateResource.cache
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.csproj.CoreCompileInputs.cache
+C:\Users\sehent\Desktop\Zacoa\Zacoa\bin\Debug\Zacoa.exe.config
+C:\Users\sehent\Desktop\Zacoa\Zacoa\bin\Debug\Zacoa.exe
+C:\Users\sehent\Desktop\Zacoa\Zacoa\bin\Debug\Zacoa.pdb
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.exe
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.pdb
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\CuentasClaras.Form1.resources
+C:\Users\sehent\Desktop\Zacoa\Zacoa\bin\Debug\Zacoa.exe.manifest
+C:\Users\sehent\Desktop\Zacoa\Zacoa\bin\Debug\Zacoa.application
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.exe.manifest
+C:\Users\sehent\Desktop\Zacoa\Zacoa\obj\Debug\Zacoa.application
